@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Highlight</title>
+  <style>
+    /* Some basic CSS styles to give height to sections and set the active highlight color */
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    section {
+      height: 80vh; /* Set each section to 80% of the viewport height */
+      width: 80%; /* Set each section to 80% of the viewport width */
+      margin: auto; /* Center the sections horizontally */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0; /* Just for visualization purposes */
+      border: 1px solid #ddd; /* Just for visualization purposes */
+    }
+    .active {
+      background-color: yellow;
+    }
+    .hfe-nav-menu {
+      margin:0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      padding: 10px 0;
+      z-index: 1000; 
+      display: flex;
+      list-style: none;
+      /* Ensure the navbar appears above other content */
+    }
+
+    .hfe-nav-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hfe-nav-menu li {
+      margin: 0 10px;
+    }
+
+    .hfe-nav-menu a {
+      text-decoration: none;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .hfe-nav-menu a.active {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <nav class="hfe-nav-menu__layout-horizontal hfe-nav-menu__submenu-arrow" data-toggle-icon="<i aria-hidden=&quot;true&quot; tabindex=&quot;0&quot; class=&quot;fas fa-align-justify&quot;></i>" data-close-icon="<i aria-hidden=&quot;true&quot; tabindex=&quot;0&quot; class=&quot;far fa-window-close&quot;></i>" data-full-width="yes">
+    <ul id="menu-1-84e7c9a" class="hfe-nav-menu">
+      <li id="menu-item-960" class="menu-item menu-item-type-custom menu-item-object-custom parent hfe-creative-menu"><a href="#Kickstart" class="hfe-menu-item __mPS2id _mPS2id-h mPS2id-highlight mPS2id-highlight-first mPS2id-highlight-last">Kickstart</a></li>
+      <li id="menu-item-961" class="menu-item menu-item-type-custom menu-item-object-custom parent hfe-creative-menu"><a href="#drive-business" class="hfe-menu-item __mPS2id _mPS2id-h">drive-business</a></li>
+      <li id="menu-item-962" class="menu-item menu-item-type-custom menu-item-object-custom parent hfe-creative-menu"><a href="#genai-services" class="hfe-menu-item __mPS2id _mPS2id-h">genai-services</a></li>
+      <li id="menu-item-963" class="menu-item menu-item-type-custom menu-item-object-custom parent hfe-creative-menu"><a href="#genai-packages" class="hfe-menu-item __mPS2id _mPS2id-h">genai-packages</a></li>
+      <li id="menu-item-964" class="menu-item menu-item-type-custom menu-item-object-custom parent hfe-creative-menu"><a href="#platform" class="hfe-menu-item __mPS2id _mPS2id-h">platform</a></li>
+      <li id="menu-item-965" class="menu-item menu-item-type-custom menu-item-object-custom parent hfe-creative-menu current-menu-item current-menu-ancestor"><a href="#getin-touch" class="hfe-menu-item __mPS2id _mPS2id-h mPS2id-clicked">getin-touch</a></li>
+     
+    </ul>
+  </nav>
+
+  <section id="Kickstart">Section 1 - Content goes here</section>
+  <section id="drive-business">Section 2 - Content goes here</section>
+  <section id="genai-services">Section 3 - Content goes here</section>
+  <section id="genai-packages">Section 4 - Content goes here</section>
+  <section id="platform">Section 5 - Content goes here</section>
+  <section id="getin-touch">Section 6 - Content goes here</section>
+  <img src="https://via.placeholder.com/500x250/FF0000/FFFFFF" alt="Placeholder Image">
+
+  <script>
+    // Get all the sections on the page
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.hfe-menu-item');
+    // Function to check if an element is in the viewport
+    function isElementInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    }
+
+    function setActiveNavItem() {
+      sections.forEach((section, index) => {
+        if (isElementInViewport(section)) {
+          // Remove active class from all navbar items first
+          navItems.forEach((navItem) => {
+            navItem.classList.remove('active');
+          });
+          // Add active class to the corresponding navbar item
+          navItems[index].classList.add('active');
+        }
+      });
+    }
+    // Add event listener for scroll events
+    window.addEventListener('scroll', setActiveNavItem);
+
+    // Call the setActiveNavItem function on page load
+    setActiveNavItem();
+  </script>
+</body>
+</html>
